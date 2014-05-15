@@ -7,6 +7,11 @@
         font-family: "Helvetica Neue", "Helvetica"
       }
 
+      main {
+        display: inline-block;
+        margin: 0 auto;
+      }
+
       fieldset {
         margin: 1.5em 0;
         padding-top: 1em;
@@ -43,74 +48,78 @@
       <h1>GitHub Digests » Settings</h1>
     </header>
 
-    <form id="settings" action="/settings" method="POST">
-      <fieldset>
-        <legend>Email Address</legend>
+    <main>
 
-        <label>
-          Send digests to
-          <select id="email" name="email" required>
-            <option selected disabled>choose an email address</option>
-            <option>avi@aviflax.com</option>
-            <option>avif@arc90.com</option>
-          </select>
-        </label>
+      <form id="settings" action="/settings" method="POST">
+        <fieldset>
+          <legend>Email Address</legend>
 
-        <label class="help">To send digests to a different address, add it to <a href="https://github.com/settings/emails">your GitHub account</a> and verify it.</label>
-      </fieldset>
-
-      <fieldset>
-        <legend>Digest Frequency</legend>
-
-        <section>
-          <label><input type="radio" name="frequency" value="hourly" required checked> Every hour</label>
-        </section>
-
-        <section>
-          <label><input id="frequency_daily" type="radio" name="frequency" value="daily" required> Every day</label>
-          <label>around
-            <select id="daily_hour" name="daily_hour" disabled>
-              <option value="5">5:00 AM</option>
-              <option value="6">6:00 AM</option>
-              <option value="7">7:00 AM</option>
-              <option value="8">8:00 AM</option>
-              <option value="9">9:00 AM</option>
-              <option value="10">10:00 AM</option>
-              <option value="11">11:00 AM</option>
-              <option value="12">12:00 (PM)</option>
-              <option value="13">13:00 (1:00 PM)</option>
-              <option value="14">14:00 (2:00 PM)</option>
-              <option value="15">15:00 (3:00 PM)</option>
-              <option value="16">16:00 (4:00 PM)</option>
-              <option value="17">17:00 (5:00 PM)</option>
-              <option value="18">18:00 (6:00 PM)</option>
-              <option value="19">19:00 (7:00 PM)</option>
-              <option value="20">20:00 (8:00 PM)</option>
-              <option value="21">21:00 (9:00 PM)</option>
-            </select>
-        </section>
-
-        <section>
-          <label><input type="radio" id="frequency_weekly" name="frequency" value="weekly" required> Weekly</label>
-          <label>on
-            <select id="weekly_day" name="weekly_day" disabled>
-              <option>Monday</option>
-              <option>Tuesday</option>
-              <option>Wednesday</option>
-              <option>Thursday</option>
-              <option>Friday</option>
-              <option>Saturday</option>
-              <option>Sunday</option>
+          <label>
+            Send digests to
+            <select id="email" name="email" required>
+              <option selected disabled>choose an email address</option>
+              <option>avi@aviflax.com</option>
+              <option>avif@arc90.com</option>
             </select>
           </label>
-        </section>
 
-        <label class="help">Note: digests will be sent only if new notifications were created since the prior digest.</label>
+          <label class="help">To send digests to a different address, add it to <a href="https://github.com/settings/emails">your GitHub account</a> and verify it.</label>
+        </fieldset>
 
-      </fieldset>
+        <fieldset>
+          <legend>Digest Frequency</legend>
 
-      <noscript><input type="submit"></noscript>
-    </form>
+          <section>
+            <label><input type="radio" name="frequency" value="hourly" required checked> Every hour</label>
+          </section>
+
+          <section>
+            <label><input id="frequency_daily" type="radio" name="frequency" value="daily" required> Every day</label>
+            <label>around
+              <select id="daily_hour" name="daily_hour" disabled>
+                <option value="5">5:00 AM</option>
+                <option value="6">6:00 AM</option>
+                <option value="7">7:00 AM</option>
+                <option value="8">8:00 AM</option>
+                <option value="9">9:00 AM</option>
+                <option value="10">10:00 AM</option>
+                <option value="11">11:00 AM</option>
+                <option value="12">12:00 (PM)</option>
+                <option value="13">13:00 (1:00 PM)</option>
+                <option value="14">14:00 (2:00 PM)</option>
+                <option value="15">15:00 (3:00 PM)</option>
+                <option value="16">16:00 (4:00 PM)</option>
+                <option value="17">17:00 (5:00 PM)</option>
+                <option value="18">18:00 (6:00 PM)</option>
+                <option value="19">19:00 (7:00 PM)</option>
+                <option value="20">20:00 (8:00 PM)</option>
+                <option value="21">21:00 (9:00 PM)</option>
+              </select>
+          </section>
+
+          <section>
+            <label><input type="radio" id="frequency_weekly" name="frequency" value="weekly" required> Weekly</label>
+            <label>on
+              <select id="weekly_day" name="weekly_day" disabled>
+                <option>Monday</option>
+                <option>Tuesday</option>
+                <option>Wednesday</option>
+                <option>Thursday</option>
+                <option>Friday</option>
+                <option>Saturday</option>
+                <option>Sunday</option>
+              </select>
+            </label>
+          </section>
+
+          <label class="help">Note: digests will be sent only if new notifications were created since the prior digest.</label>
+
+        </fieldset>
+
+        <noscript><input type="submit"></noscript>
+      </form>
+
+    </main>
 
     <footer>
       <nav>
