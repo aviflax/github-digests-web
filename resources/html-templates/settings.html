@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="utf-8">
     <title>GitHub Digests » Settings</title>
     <style>
       html, body {
-        font-family: "Helvetica Neue", "Helvetica"
+        font-family: "Helvetica Neue", "Helvetica";
+        font-size: 14pt;
+        text-align: center;
       }
 
       main {
         display: inline-block;
-        margin: 0 auto;
+        text-align: left;
       }
 
       fieldset {
-        margin: 1.5em 0;
+        margin: 2em 0;
+        border-radius: 20px 10px;
         padding-top: 1em;
         padding-bottom: 1em;
+      }
+
+      legend {
+        font-weight: bold;
       }
 
       details {
@@ -30,6 +38,22 @@
         display: block;
         margin-top: 1em;
         font-style: italic;
+      }
+
+      #form_delete {
+        margin: 5em 0;
+        border-top: 1px solid gray;
+        border-bottom: 1px solid gray;
+        padding: 1em 0;
+      }
+
+      #form_delete fieldset {
+        border: 1px groove red;
+      }
+
+      nav ul {
+        list-style: none;
+        padding: 0;
       }
     </style>
 
@@ -49,6 +73,18 @@
 
                 d.getElementById('weekly_hour').disabled = ! d.getElementById('frequency_weekly').checked;
                 d.getElementById('weekly_hour').required = d.getElementById('frequency_weekly').checked;
+              }
+            );
+
+            d.getElementById('checkbox_enable_delete').addEventListener('change',
+              function(event) {
+                d.getElementById('button_delete').disabled = ! event.target.checked;
+              }
+            );
+
+            d.getElementById('button_delete').addEventListener('click',
+              function(event) {
+                alert('Coming soon!');
               }
             );
           }
@@ -150,8 +186,8 @@
                 <option value="7">7:00 (AM)</option>
                 <option value="8">8:00 (AM)</option>
                 <option value="9">9:00 (AM)</option>
-                <option value="10">10:00 AM</option>
-                <option value="11">11:00 AM</option>
+                <option value="10">10:00 (AM)</option>
+                <option value="11">11:00 (AM)</option>
                 <option value="12">12:00 (PM)</option>
                 <option value="13">13:00 (1:00 PM)</option>
                 <option value="14">14:00 (2:00 PM)</option>
@@ -167,14 +203,26 @@
 
           <label class="help">Digests will be sent only if new notifications were created since the prior digest.</label>
         </fieldset>
+
+        <fieldset>
+          <legend>Notification Status</legend>
+          <label><input type="checkbox" id="notifications_set_read_on_open" value="true"> Set notification status to <i>read</i> (in GitHub) when digest email is opened</label>
+        </fieldset>
+      </form>
+
+      <form id="form_delete">
+        <fieldset>
+          <legend>Delete Account</legend>
+          <section><label><input type="checkbox" id="checkbox_enable_delete"> Enable account deletion</label></section>
+          <button id="button_delete" disabled>Delete Account</button>
+        </fieldset>
       </form>
     </main>
 
     <footer>
       <nav>
         <ul>
-          <li>by <a href="http://aviflax.com">Avi Flax</a></li>
-          <li><a href="/delete">Delete Account</a></li>
+          <li><a href="/about">About</a></li>
           <li><a href="/colophon">Colophon</a></li>
         </ul>
       </nav>
