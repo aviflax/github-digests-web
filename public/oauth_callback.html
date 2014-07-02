@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>GitHub Digests » OAuth Callback</title>
+    <link rel="stylesheet" href="/main.css" charset="utf-8"></link>
+    <script>
+      (function() {
+        var d = document;
+        var GITHUB_API_CLIENT_ID = '25016e5023978c71e448';
+
+        function get_url_query_param_value(sVar) {
+          return decodeURI(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURI(sVar).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+        }
+
+        function request_token(cb) {
+          var req = new XMLHttpRequest();
+          var body = new FormData();
+          body.append('client_id')
+          req.open('POST', 'https://github.com/login/oauth/access_token');
+          req.send(body);
+        }
+
+        function handle_token() {
+
+        }
+
+        var code = get_url_query_param_value('code');
+        var state = get_url_query_param_value('state');
+
+        if (state === sessionStorage.github_auth_nonce) {
+          request_token(handle_token);
+        } else {
+          alert('Nonce does not match!');
+        }
+      }).call(this);
+    </script>
+  </head>
+  <body>
+
+    <p>Fetching token, please wait…</p>
+    <noscript>To use GitHub Digests, JavaScript must be enabled.</noscript>
+
+  </body>
+</html>

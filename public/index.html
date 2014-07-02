@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>GitHub Digests » Log In</title>
+    <link rel="stylesheet" href="/main.css" charset="utf-8"></link>
+    <script>
+      (function() {
+        var d = document;
+
+        d.addEventListener('DOMContentLoaded',
+          function() {
+            d.getElementById('login_help').addEventListener('click', redirect_to_oauth_start);
+            d.getElementById('login_help').style.display = "block";
+          }
+        );
+
+        function redirect_to_oauth_start() {
+          window.location = document.location.href + 'oauth2/start';
+        }
+
+      }).call(this);
+    </script>
+  </head>
+  <body>
+
+    <header>
+      <h1>GitHub Digests</h1>
+    </header>
+
+    <main>
+      <p id="login_help">To use GitHub Digests you must <button id="sign_in">Sign in with GitHub</button>.</p>
+      <noscript>To use GitHub Digests, JavaScript must be enabled.</noscript>
+    </main>
+  </body>
+</html>

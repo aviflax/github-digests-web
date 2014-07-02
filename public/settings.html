@@ -3,69 +3,31 @@
   <head>
     <meta charset="utf-8">
     <title>GitHub Digests » Settings</title>
-    <style>
-      html, body {
-        font-family: "Helvetica Neue", "Helvetica";
-        font-size: 14pt;
-        text-align: center;
-      }
-
-      input, select, option {
-        font-family: "Helvetica Neue", "Helvetica";
-        font-size: 14pt;
-      }
-
-      main {
-        display: inline-block;
-        text-align: left;
-      }
-
-      fieldset {
-        margin: 2em 0;
-        border-radius: 20px 10px;
-        padding-top: 1em;
-        padding-bottom: 1em;
-      }
-
-      legend {
-        font-weight: bold;
-      }
-
-      details {
-        margin: 1em 0;
-      }
-
-      section {
-        margin: 0.5em 0;
-      }
-
-      label.help {
-        display: block;
-        margin-top: 1em;
-        font-style: italic;
-      }
-
-      #form_delete {
-        margin: 3em 0 2em 0;
-        border-top: 2px groove silver;
-        border-bottom: 2px groove silver;
-        padding: 0;
-      }
-
-      #form_delete fieldset {
-        margin: 1em 0;
-        border: 1px groove red;
-      }
-
-      nav ul {
-        list-style: none;
-        padding: 0;
-      }
-    </style>
-
+    <link rel="stylesheet" href="/main.css" charset="utf-8"></link>
     <script>
       (function() {
         var d = document;
+
+        function request_change(path, value) {
+          var client = new XMLHttpRequest();
+          client.addEventListener('load', change_succeeded);
+          client.open('PATCH', '/settings')
+          client.setRequestHeader('Content-Type', 'application/json-patch+json');
+
+          var body = [
+            {
+              'op': 'replace',
+              'path': path,
+              'value': value
+            }
+          ];
+
+          client.send(JSON.stringify(body));
+        }
+
+        function change_succeeded() {
+
+        }
 
         d.addEventListener('DOMContentLoaded',
           function() {

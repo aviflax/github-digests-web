@@ -1,0 +1,62 @@
+html, body {
+  font-family: "Helvetica Neue", "Helvetica";
+  font-size: 14pt;
+  text-align: center;
+}
+
+#login_help {
+  /* will be displayed by script */
+  display: none;
+}
+
+input, select, option {
+  font-family: "Helvetica Neue", "Helvetica";
+  font-size: 14pt;
+}
+
+main {
+  display: inline-block;
+  text-align: left;
+}
+
+fieldset {
+  margin: 2em 0;
+  border-radius: 20px 10px;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+legend {
+  font-weight: bold;
+}
+
+details {
+  margin: 1em 0;
+}
+
+section {
+  margin: 0.5em 0;
+}
+
+label.help {
+  display: block;
+  margin-top: 1em;
+  font-style: italic;
+}
+
+#form_delete {
+  margin: 3em 0 2em 0;
+  border-top: 2px groove silver;
+  border-bottom: 2px groove silver;
+  padding: 0;
+}
+
+#form_delete fieldset {
+  margin: 1em 0;
+  border: 1px groove red;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
