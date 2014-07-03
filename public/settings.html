@@ -10,7 +10,7 @@
 
         function request_change(path, value) {
           var client = new XMLHttpRequest();
-          client.addEventListener('load', change_succeeded);
+          client.addEventListener('load', handle_change_success);
           client.open('PATCH', '/settings')
           client.setRequestHeader('Content-Type', 'application/json-patch+json');
 
@@ -25,9 +25,25 @@
           client.send(JSON.stringify(body));
         }
 
-        function change_succeeded() {
+        function handle_change_success() {
 
         }
+
+        function request_settings() {
+          var client = new XMLHttpRequest();
+          client.addEventListener('load', handle_settings_success);
+          client.responseType = 'json';
+          client.open('GET', '/settings')
+          client.setRequestHeader('Accept', 'application/json');
+          client.send();
+        }
+
+        function handle_settings_success() {
+          console.log(this);
+          console.log(this.response);
+        }
+
+        request_settings();
 
         d.addEventListener('DOMContentLoaded',
           function() {
