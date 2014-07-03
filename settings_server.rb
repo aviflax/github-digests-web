@@ -25,7 +25,10 @@ end
 get '/oauth2/callback' do
   code = params[:code]
   state = params[:state]
-  puts "CODE " + code
+
+  if state != session[:state]
+    redirect '/settings', 307
+  end
 
   result = RestClient.post('https://github.com/login/oauth/access_token',
                             {:client_id => GITHUB_API_CLIENT_ID,
@@ -34,6 +37,7 @@ get '/oauth2/callback' do
                              :accept => :json)
 
   # TODO: handle failure
+  # TODO: confirm that we have access to the scopes we need — see https://developer.github.com/guides/basics-of-authentication/#checking-granted-scopes
 
   session[:token] = JSON.parse(result)['access_token']
 
@@ -43,6 +47,8 @@ end
 get '/settings', :provides => 'html' do
   # TODO: confirm that we can successfully retrieve data from the GH API using the token
   # gh_client = Octokit::Client.new(:access_token => session[:token])
+
+  # TODO: confirm that we have access to the scopes we need — see https://developer.github.com/guides/basics-of-authentication/#checking-granted-scopes
 
   unless session[:token]
     redirect '/', 307
