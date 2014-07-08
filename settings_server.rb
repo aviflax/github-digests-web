@@ -11,6 +11,14 @@ GITHUB_API_SECRET = 'cb2a90c85a6f164ddc94dca828a1878afb897347'
 
 gh_client = nil
 
+helpers do
+  def protected!
+    unless session[:token]
+      redirect '/', 307
+    end
+  end
+end
+
 get '/' do
   send_file File.join(settings.public_folder, 'index.html')
 end
@@ -27,6 +35,7 @@ get '/oauth2/callback' do
   state = params[:state]
 
   if state != session[:state]
+    # TODO: this could maybe lead to an infinite redirection loop. perhaps it would be better to just return an error response
     redirect '/settings', 307
   end
 
@@ -45,31 +54,24 @@ get '/oauth2/callback' do
 end
 
 get '/settings', :provides => 'html' do
+  protected!
   # TODO: confirm that we can successfully retrieve data from the GH API using the token
   # gh_client = Octokit::Client.new(:access_token => session[:token])
 
   # TODO: confirm that we have access to the scopes we need — see https://developer.github.com/guides/basics-of-authentication/#checking-granted-scopes
-
-  unless session[:token]
-    redirect '/', 307
-  end
-
   send_file File.join(settings.public_folder, 'settings.html')
 end
 
 get '/settings', :provides => 'json' do
+  protected!
   # TODO: confirm that we can successfully retrieve data from the GH API using the token
   # gh_client = Octokit::Client.new(:access_token => session[:token])
-
-  unless session[:token]
-    redirect '/', 307
-  end
-
   '{"nothing": "yet"}'
 end
 
 patch '/settings' do
-  # TODO: ensure the user is signed in
+  protected!
   # TODO: validate and process the request
+  # TODO: actually retrieve the actual data, actually
   [204, nil]
 end
