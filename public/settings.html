@@ -49,14 +49,24 @@
           function() {
             d.getElementById('frequency').addEventListener('change',
               function(event) {
-                d.getElementById('daily_hour').disabled = ! d.getElementById('frequency_daily').checked;
-                d.getElementById('daily_hour').required = d.getElementById('frequency_daily').checked;
+                var daily_enabled = d.getElementById('frequency_daily').checked;
+                
+                d.getElementById('daily_hour').disabled = !daily_enabled;
+                d.getElementById('daily_hour').required = daily_enabled;
 
-                d.getElementById('weekly_day').disabled = ! d.getElementById('frequency_weekly').checked;
-                d.getElementById('weekly_day').required = d.getElementById('frequency_weekly').checked;
+                d.getElementById('daily_timezone').disabled = !daily_enabled;
+                d.getElementById('daily_timezone').required = daily_enabled;
 
-                d.getElementById('weekly_hour').disabled = ! d.getElementById('frequency_weekly').checked;
-                d.getElementById('weekly_hour').required = d.getElementById('frequency_weekly').checked;
+                var weekly_enabled = d.getElementById('frequency_weekly').checked;
+
+                d.getElementById('weekly_day').disabled = !weekly_enabled;
+                d.getElementById('weekly_day').required = weekly_enabled;
+
+                d.getElementById('weekly_hour').disabled = !weekly_enabled;
+                d.getElementById('weekly_hour').required = weekly_enabled;
+
+                d.getElementById('weekly_timezone').disabled = !weekly_enabled;
+                d.getElementById('weekly_timezone').required = weekly_enabled;
               }
             );
 
@@ -148,6 +158,13 @@
                 <option value="20">20:00 (8:00 PM)</option>
                 <option value="21">21:00 (9:00 PM)</option>
               </select>
+            </label>
+
+            <label>in
+              <select id="daily_timezone" disabled>
+                <option>America/New York (-04:00)</option>
+              </select>
+            </label>
           </section>
 
           <section>
@@ -183,6 +200,13 @@
                 <option value="20">20:00 (8:00 PM)</option>
                 <option value="21">21:00 (9:00 PM)</option>
               </select>
+            </label>
+
+            <label>in
+              <select id="weekly_timezone" disabled>
+                <option>America/New York (-04:00)</option>
+              </select>
+            </label>
           </section>
 
           <label class="help">Digests will be sent only if new notifications were created since the prior digest.</label>
