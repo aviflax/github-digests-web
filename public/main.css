@@ -45,9 +45,7 @@ label.help {
 }
 
 #form_delete {
-  margin: 3em 0 2em 0;
-  border-top: 2px groove silver;
-  border-bottom: 2px groove silver;
+  margin: 6em 0 2em 0;
   padding: 0;
 }
 
