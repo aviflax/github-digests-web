@@ -56,17 +56,6 @@
 
                 d.getElementById('daily_timezone').disabled = !daily_enabled;
                 d.getElementById('daily_timezone').required = daily_enabled;
-
-                var weekly_enabled = d.getElementById('frequency_weekly').checked;
-
-                d.getElementById('weekly_day').disabled = !weekly_enabled;
-                d.getElementById('weekly_day').required = weekly_enabled;
-
-                d.getElementById('weekly_hour').disabled = !weekly_enabled;
-                d.getElementById('weekly_hour').required = weekly_enabled;
-
-                d.getElementById('weekly_timezone').disabled = !weekly_enabled;
-                d.getElementById('weekly_timezone').required = weekly_enabled;
               }
             );
 
@@ -162,48 +151,6 @@
 
             <label>in
               <select id="daily_timezone" disabled>
-                <option>America/New York (-04:00)</option>
-              </select>
-            </label>
-          </section>
-
-          <section>
-            <label><input type="radio" id="frequency_weekly" name="frequency" value="weekly" required> Weekly</label>
-            <label>on
-              <select id="weekly_day" name="weekly_day" disabled>
-                <option>Mondays</option>
-                <option>Tuesdays</option>
-                <option>Wednesdays</option>
-                <option>Thursdays</option>
-                <option>Fridays</option>
-                <option>Saturdays</option>
-                <option>Sundays</option>
-              </select>
-            </label>
-            <label>around
-              <select id="weekly_hour" name="weekly_hour" disabled>
-                <option value="5">5:00 (AM)</option>
-                <option value="6">6:00 (AM)</option>
-                <option value="7">7:00 (AM)</option>
-                <option value="8">8:00 (AM)</option>
-                <option value="9">9:00 (AM)</option>
-                <option value="10">10:00 (AM)</option>
-                <option value="11">11:00 (AM)</option>
-                <option value="12">12:00 (PM)</option>
-                <option value="13">13:00 (1:00 PM)</option>
-                <option value="14">14:00 (2:00 PM)</option>
-                <option value="15">15:00 (3:00 PM)</option>
-                <option value="16">16:00 (4:00 PM)</option>
-                <option value="17">17:00 (5:00 PM)</option>
-                <option value="18">18:00 (6:00 PM)</option>
-                <option value="19">19:00 (7:00 PM)</option>
-                <option value="20">20:00 (8:00 PM)</option>
-                <option value="21">21:00 (9:00 PM)</option>
-              </select>
-            </label>
-
-            <label>in
-              <select id="weekly_timezone" disabled>
                 <option>America/New York (-04:00)</option>
               </select>
             </label>
