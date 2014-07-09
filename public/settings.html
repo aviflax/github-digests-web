@@ -47,18 +47,6 @@
 
         d.addEventListener('DOMContentLoaded',
           function() {
-            d.getElementById('frequency').addEventListener('change',
-              function(event) {
-                var daily_enabled = d.getElementById('frequency_daily').checked;
-                
-                d.getElementById('daily_hour').disabled = !daily_enabled;
-                d.getElementById('daily_hour').required = daily_enabled;
-
-                d.getElementById('daily_timezone').disabled = !daily_enabled;
-                d.getElementById('daily_timezone').required = daily_enabled;
-              }
-            );
-
             d.getElementById('checkbox_enable_delete').addEventListener('change',
               function(event) {
                 d.getElementById('button_delete').disabled = ! event.target.checked;
@@ -81,6 +69,8 @@
     </header>
 
     <main>
+      <p class="message">Congratulations! Your account is now active and you will receive daily digests. You can change your settings or delete your account below.</p>
+
       <form id="settings" action="/settings" method="POST">
         <fieldset>
           <legend>Email Address</legend>
@@ -119,16 +109,12 @@
         </fieldset>
 
         <fieldset id="frequency">
-          <legend>Digest Frequency</legend>
+          <legend>Digest Time</legend>
 
           <section>
-            <label><input type="radio" name="frequency" value="hourly" required checked> Hourly</label>
-          </section>
-
-          <section>
-            <label><input id="frequency_daily" type="radio" name="frequency" value="daily" required> Daily</label>
+            <label>Your digest will be sent daily</label>
             <label>around
-              <select id="daily_hour" name="daily_hour" disabled>
+              <select id="daily_hour" name="daily_hour">
                 <option value="5">5:00 (AM)</option>
                 <option value="6">6:00 (AM)</option>
                 <option value="7">7:00 (AM)</option>
@@ -150,13 +136,15 @@
             </label>
 
             <label>in
-              <select id="daily_timezone" disabled>
+              <select id="daily_timezone">
+                <!-- TODO: I need some way to populate this list. -->
                 <option>America/New York (-04:00)</option>
               </select>
             </label>
-          </section>
 
-          <label class="help">Digests will be sent only if new notifications were created since the prior digest.</label>
+            <label>if you have new notifications since the prior day.</label>
+
+          </section>
         </fieldset>
       </form>
 
