@@ -1,36 +1,13 @@
-# github-digest-server
+# github-digest-web
 
-FIXME: description
+The Web UI for GitHub Digests.
 
-## Installation
+## Ideas
 
-Download from http://example.com/FIXME.
+* Perhaps this could be generalized into a service that could aggregate any stream of notifications into daily digests! And then GitHub could just be one source of potentially many. Maybe I could call it something like “digestify” or “digestifier”. Would be a lot more work but potentially fun and interesting and worthwhile.
 
-## Usage
+## Copyright & License
 
-FIXME: explanation
+Copyright © 2014 Avi Flax
 
-    $ java -jar github-digest-server-0.1.0-standalone.jar [args]
-
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
-
-## License
-
-Copyright © 2014 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Distributed under the {TBD} License
