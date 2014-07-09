@@ -4,64 +4,7 @@
     <meta charset="utf-8">
     <title>GitHub Digests » Settings</title>
     <link rel="stylesheet" href="/main.css" charset="utf-8"></link>
-    <script>
-      (function() {
-        var d = document;
-
-        function request_change(path, value) {
-          var client = new XMLHttpRequest();
-          client.addEventListener('load', handle_change_success);
-          client.open('PATCH', '/settings')
-          client.setRequestHeader('Content-Type', 'application/json-patch+json');
-
-          var body = [
-            {
-              'op': 'replace',
-              'path': path,
-              'value': value
-            }
-          ];
-
-          client.send(JSON.stringify(body));
-        }
-
-        function handle_change_success() {
-
-        }
-
-        function request_settings() {
-          var client = new XMLHttpRequest();
-          client.addEventListener('load', handle_settings_success);
-          client.responseType = 'json';
-          client.open('GET', '/settings')
-          client.setRequestHeader('Accept', 'application/json');
-          client.send();
-        }
-
-        function handle_settings_success() {
-          console.log(this);
-          console.log(this.response);
-        }
-
-        request_settings();
-
-        d.addEventListener('DOMContentLoaded',
-          function() {
-            d.getElementById('checkbox_enable_delete').addEventListener('change',
-              function(event) {
-                d.getElementById('button_delete').disabled = ! event.target.checked;
-              }
-            );
-
-            d.getElementById('button_delete').addEventListener('click',
-              function(event) {
-                alert('Coming soon!');
-              }
-            );
-          }
-        );
-      }).call(this);
-    </script>
+    <script charset="utf-8" src="/settings.js"></script>
   </head>
   <body>
     <header>
