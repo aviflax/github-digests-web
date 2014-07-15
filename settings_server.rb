@@ -1,8 +1,12 @@
-require 'sinatra'
 require 'securerandom'
 require 'uri'
+
+require 'sinatra'
 require 'restclient'
 require 'octokit'
+
+require_relative './db'
+require_relative './settings'
 
 enable :sessions
 
@@ -26,7 +30,7 @@ end
 get '/oauth2/start' do
   session[:state] = SecureRandom.urlsafe_base64(16)
   redirect_uri = 'http://localhost/oauth2/callback'
-  uri = "https://github.com/login/oauth/authorize?client_id=#{GITHUB_API_CLIENT_ID}&redirect_uri=#{URI.encode_www_form_component(redirect_uri)}&scope=notifications,user&state=#{session[:state]}";
+  uri = "https://github.com/login/oauth/authorize?client_id=#{GITHUB_API_CLIENT_ID}&redirect_uri=#{URI.encode_www_form_component(redirect_uri)}&scope=notifications,user&state=#{session[:state]}"
   redirect uri, 307
 end
 
@@ -49,6 +53,14 @@ get '/oauth2/callback' do
   # TODO: confirm that we have access to the scopes we need — see https://developer.github.com/guides/basics-of-authentication/#checking-granted-scopes
 
   session[:token] = JSON.parse(result)['access_token']
+
+  gh_client = Octokit::Client.new(:access_token => session[:token])
+  user = gh_client.user
+
+  if not DB.account_exists?(user.id)
+    settings = initial_settings(user, gh_client.orgs)
+    DB.create_account(user.id, session[:token], settings)
+  end
 
   redirect '/settings', 307
 end
