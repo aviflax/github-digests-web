@@ -35,4 +35,8 @@ module DB
     return account
   end
 
+  def self.get_settings(id)
+    account = r.table('accounts').get(id).run(@connection)
+    account['settings']
+  end
 end

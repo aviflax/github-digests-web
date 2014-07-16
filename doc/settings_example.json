@@ -1,8 +1,8 @@
 {
-    "main_email": "avif@arc90.com",
+    "default_email": "'main' or address@domain.tlk",
     "per_org_email": {
-        "arc90": "main",
-        "SFX": "main"
+        "54353": "'default' or address@domain.tld",
+        "76575": "'default' or address@domain.tld"
     },
     "time": "05:00",
     "time_zone": "Asia/Jerusalem"

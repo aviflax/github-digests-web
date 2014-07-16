@@ -1,3 +1,4 @@
+require 'json'
 require 'securerandom'
 require 'uri'
 
@@ -62,23 +63,22 @@ get '/oauth2/callback' do
     DB.create_account(user.id, session[:token], settings)
   end
 
+  # Cache the user ID in the session for improved performance and etc.
+  session[:user_id] = user.id
+
   redirect '/settings', 307
 end
 
 get '/settings', :provides => 'html' do
   protected!
-  # TODO: confirm that we can successfully retrieve data from the GH API using the token
-  # gh_client = Octokit::Client.new(:access_token => session[:token])
-
   # TODO: confirm that we have access to the scopes we need — see https://developer.github.com/guides/basics-of-authentication/#checking-granted-scopes
   send_file File.join(settings.public_folder, 'settings.html')
 end
 
 get '/settings', :provides => 'json' do
   protected!
-  # TODO: confirm that we can successfully retrieve data from the GH API using the token
-  # gh_client = Octokit::Client.new(:access_token => session[:token])
-  '{"nothing": "yet"}'
+  settings = DB.get_settings(session[:user_id])
+  settings.to_json
 end
 
 patch '/settings' do
