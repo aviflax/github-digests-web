@@ -14,8 +14,6 @@ enable :sessions
 GITHUB_API_CLIENT_ID = ENV['GH_API_CLIENT_ID']
 GITHUB_API_SECRET = ENV['GH_API_SECRET']
 
-gh_client = nil
-
 helpers do
   def protected!
     unless session[:token]
