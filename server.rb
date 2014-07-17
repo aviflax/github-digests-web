@@ -11,8 +11,8 @@ require_relative './settings'
 
 enable :sessions
 
-GITHUB_API_CLIENT_ID = '25016e5023978c71e448'
-GITHUB_API_SECRET = 'cb2a90c85a6f164ddc94dca828a1878afb897347'
+GITHUB_API_CLIENT_ID = ENV['GH_API_CLIENT_ID']
+GITHUB_API_SECRET = ENV['GH_API_SECRET']
 
 gh_client = nil
 
