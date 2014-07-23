@@ -27,8 +27,6 @@ module DB
 
     if result['inserted'] != 1
       raise 'account already exists'
-    else
-      puts 'Created Account', account
     end
 
     # so if we get here, I guess it succeeded... right?
