@@ -26,7 +26,7 @@ update_ui_values = (settings) ->
 
   # settings.default_email will contain either 'main', which is a directive to
   # use the main email address in settings.emails.main, or an email address
-  d.getElementById('default_email').value = if settings.default_email is 'main' then settings.emails.main else settings.default_email
+  d.getElementById('default_email').value = settings.default_email
 
   # TODO: populate the values and names of each Organization
 
