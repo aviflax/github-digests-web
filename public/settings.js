@@ -23,8 +23,9 @@
   handle_patch_success = function() {};
 
   update_ui_values = function(settings) {
-    d.getElementById('default_email').value = settings.default_email === 'main' ? settings.emails.main : settings.default_email;
+    d.getElementById('default_email').value = settings.default_email;
     d.getElementById('daily_hour').value = settings.hour;
+    d.getElementById('daily_timezone').value = settings.time_zone;
   };
 
   show_ui = function() {

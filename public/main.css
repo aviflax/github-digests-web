@@ -17,7 +17,7 @@ input, select, option {
 main {
   display: inline-block;
   text-align: left;
-  max-width: 40em;
+  max-width: 50em;
 }
 
 #settings_main {

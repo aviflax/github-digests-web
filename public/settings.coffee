@@ -31,8 +31,7 @@ update_ui_values = (settings) ->
   # TODO: populate the values and names of each Organization
 
   d.getElementById('daily_hour').value = settings.hour
-
-  # TODO: set the timezone to something?
+  d.getElementById('daily_timezone').value = settings.time_zone
 
   return
 
@@ -60,12 +59,8 @@ handle_get_settings_success = ->
 
   return
 
-# handle_get_timezones_success = ->
-#   console.log this
-#   return
-
+# possible race condition here with the DOM being loaded.
 request_get '/settings', handle_get_settings_success
-# request_get '/timezones', handle_get_timezones_success
 
 d.addEventListener 'DOMContentLoaded', ->
     delete_button = d.getElementById('button_delete')
