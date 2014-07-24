@@ -20,6 +20,12 @@ main {
   max-width: 40em;
 }
 
+#settings_main {
+  /* The settings UI will be displayed by JS once the
+     settings data are loaded and populated. */
+  display: none;
+}
+
 fieldset {
   margin: 2em 0;
   border-radius: 20px 10px;

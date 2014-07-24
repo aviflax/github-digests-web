@@ -89,3 +89,7 @@ patch '/settings' do
   # TODO: actually retrieve the actual data, actually
   [204, nil]
 end
+
+# get '/timezones' do
+#   ['America/New York'].to_json
+# end

@@ -20,20 +20,52 @@ request_patch = (path, value) ->
 handle_patch_success = ->
   return
 
-request_get = ->
+update_ui_values = (settings) ->
+
+  # TODO: populate the email dropdown with all the valid options, then set it
+
+  # settings.default_email will contain either 'main', which is a directive to
+  # use the main email address in settings.emails.main, or an email address
+  d.getElementById('default_email').value = if settings.default_email is 'main' then settings.emails.main else settings.default_email
+
+  # TODO: populate the values and names of each Organization
+
+  d.getElementById('daily_hour').value = settings.hour
+
+  # TODO: set the timezone to something?
+
+  return
+
+show_ui = () ->
+  d.getElementById('loading').style.display = 'none'
+  d.getElementById('settings_main').style.display = 'inline-block'
+
+request_get = (url, success_callback) ->
   client = new XMLHttpRequest()
-  client.addEventListener 'load', handle_get_success
+  client.addEventListener 'load', success_callback
   client.responseType = 'json'
-  client.open 'GET', '/settings'
+  client.open 'GET', url
   client.setRequestHeader 'Accept', 'application/json'
   client.send()
   return
 
-handle_get_success = ->
+handle_get_settings_success = ->
   console.log this
   console.log this.response
+  settings = this.response
 
-request_get()
+  # possible race condition here with the DOM being loaded.
+  update_ui_values settings
+  show_ui()
+
+  return
+
+# handle_get_timezones_success = ->
+#   console.log this
+#   return
+
+request_get '/settings', handle_get_settings_success
+# request_get '/timezones', handle_get_timezones_success
 
 d.addEventListener 'DOMContentLoaded', ->
     delete_button = d.getElementById('button_delete')
