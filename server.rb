@@ -1,3 +1,7 @@
+require 'dotenv'
+Dotenv.load
+
+
 require 'json'
 require 'securerandom'
 require 'uri'
@@ -11,8 +15,8 @@ require_relative './settings'
 
 enable :sessions
 
-GITHUB_API_CLIENT_ID = ENV['GH_API_CLIENT_ID']
-GITHUB_API_SECRET = ENV['GH_API_SECRET']
+GITHUB_API_CLIENT_ID = ENV['GITHUB_API_CLIENT_ID']
+GITHUB_API_SECRET = ENV['GITHUB_API_SECRET']
 
 helpers do
   def protected!
