@@ -23,6 +23,6 @@ def initial_settings(user, orgs)
   # But I don’t really understand Ruby scopes or what changes are visible across
   # threads, so this seems like a good precaution for now
   settings = DEFAULT_SETTINGS.clone
-  settings[:per_org_email] = orgs.collect { |org| {:id=>org.id, :name=>org.login, :email=>'default'} }
+  settings[:per_org_email] = orgs.map { |org| {:id=>org.id, :name=>org.login, :email=>'default'} }
   return settings
 end

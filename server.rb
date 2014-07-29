@@ -79,13 +79,12 @@ end
 
 get '/settings', :provides => 'json' do
   protected!
-  settings = DB.get_settings(session[:user_id])
-  settings.to_json
+  DB.get_settings(session[:user_id]).to_json
 end
 
 patch '/settings' do
   protected!
   # TODO: validate and process the request
-  # TODO: actually retrieve the actual data, actually
+  # TODO: actually update the actual data, actually
   [204, nil]
 end
