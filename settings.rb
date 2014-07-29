@@ -1,5 +1,5 @@
 DEFAULT_SETTINGS = {
-    :default_email => "main",
+    :default_email => "primary",
     :per_org_email  => [
         {
           :id => 12345,
@@ -10,7 +10,7 @@ DEFAULT_SETTINGS = {
     :hour => "05:00",
     :time_zone => "Asia/Jerusalem",
     :emails => {
-      :main => "whatever@domain.tld",
+      :primary => "whatever@domain.tld",
       :additional => [
         "whatever@domain.tld",
         "whatever@domain.tld"
@@ -24,16 +24,17 @@ def initial_settings(user, orgs, emails)
   # threads, so this seems like a good precaution for now
   settings = DEFAULT_SETTINGS.clone
   settings[:per_org_email] = orgs.map { |org| {:id=>org.id, :name=>org.login, :email=>'default'} }
-  add_emails(settings, emails)
+  settings[:emails] = emails_to_hash(emails)
+  return settings
 end
 
-# Accepts a settings hash and a user and adds the user’s current email addresses
-# to the settings hash. Useful for refreshing the email addresses present in a
-# settings object. Returns the settings hash.
-def add_emails(settings, emails)
-  settings[:emails] = {
-    :main => emails.find { |email| email.primary }.email,
+# Accepts an emails hash as returned by GitHub and converts it to the hash
+# structure expected by this app. The resulting hash contains only verified
+# email addresses. Useful when creating initial settings for a
+# new account and when updating the :emails key of an existing Account.
+def emails_to_hash(emails)
+  {
+    :primary => emails.find { |email| email.primary }.email,
     :additional => emails.select { |email| !email.primary && email.verified}.map { |email| email.email }
   }
-  settings
 end

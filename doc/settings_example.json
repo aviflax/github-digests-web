@@ -1,5 +1,5 @@
 {
-    "default_email": "'main' or address@domain.tlk",
+    "default_email": "'primary' or address@domain.tlk",
     "per_org_email": [
         {
             "id": "54353",
@@ -15,7 +15,7 @@
     "hour": "05:00",
     "time_zone": "Asia/Jerusalem",
     "emails": {
-        "main": "avi@aviflax.com",
+        "primary": "avi@aviflax.com",
         "additional": [
             "avif@arc90.com"
             "avif@sfxii.com"

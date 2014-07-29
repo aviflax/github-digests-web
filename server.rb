@@ -1,7 +1,6 @@
 require 'dotenv'
 Dotenv.load
 
-
 require 'json'
 require 'securerandom'
 require 'uri'
@@ -64,6 +63,9 @@ get '/oauth2/callback' do
     settings = initial_settings(user, gh_client.orgs, gh_client.emails)
     DB.create_account(user.id, session[:token], settings)
   end
+
+  # TODO: if the account already exists, check if its email addresses have
+  # changed and if so do something about it
 
   # Cache the user ID in the session for improved performance and etc.
   session[:user_id] = user.id

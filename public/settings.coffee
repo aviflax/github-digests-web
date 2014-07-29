@@ -18,17 +18,45 @@ request_patch = (path, value) ->
   return
 
 handle_patch_success = ->
+  #TODO
+  return
+
+populate_orgs = (orgs) ->
+  #TODO
+  return
+
+clear_emails = () ->
+  dropdown = d.getElementById 'default_email'
+  children = (child for child in dropdown.children)
+  dropdown.removeChild child for child in children
+  return
+
+populate_emails = (emails) ->
+  dropdown = d.getElementById 'default_email'
+
+  create_option = (value, text) ->
+    option = d.createElement 'option'
+    option.value = value
+    option.appendChild d.createTextNode text
+    return option
+
+  dropdown.appendChild create_option 'primary', "primary address (currently #{emails.primary})"
+  dropdown.appendChild create_option address, address for address in emails.additional
+
   return
 
 update_ui_values = (settings) ->
 
   # TODO: populate the email dropdown with all the valid options, then set it
+  clear_emails()
+  populate_emails settings.emails
 
-  # settings.default_email will contain either 'main', which is a directive to
-  # use the main email address in settings.emails.main, or an email address
+  # settings.default_email will contain either 'primary', which is a directive to
+  # use the primary email address in settings.emails.primary, or an email address
   d.getElementById('default_email').value = settings.default_email
 
   # TODO: populate the values and names of each Organization
+  populate_orgs(settings.per_org_email)
 
   d.getElementById('daily_hour').value = settings.hour
   d.getElementById('daily_timezone').value = settings.time_zone
