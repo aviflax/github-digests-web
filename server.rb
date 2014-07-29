@@ -33,7 +33,7 @@ end
 get '/oauth2/start' do
   session[:state] = SecureRandom.urlsafe_base64(16)
   redirect_uri = 'http://localhost/oauth2/callback'
-  uri = "https://github.com/login/oauth/authorize?client_id=#{GITHUB_API_CLIENT_ID}&redirect_uri=#{URI.encode_www_form_component(redirect_uri)}&scope=notifications,user&state=#{session[:state]}"
+  uri = "https://github.com/login/oauth/authorize?client_id=#{GITHUB_API_CLIENT_ID}&redirect_uri=#{URI.encode_www_form_component(redirect_uri)}&scope=notifications,user:email,read:org&state=#{session[:state]}"
   redirect uri, 307
 end
 
@@ -61,7 +61,7 @@ get '/oauth2/callback' do
   user = gh_client.user
 
   if not DB.account_exists?(user.id)
-    settings = initial_settings(user, gh_client.orgs)
+    settings = initial_settings(user, gh_client.orgs, gh_client.emails)
     DB.create_account(user.id, session[:token], settings)
   end
 
