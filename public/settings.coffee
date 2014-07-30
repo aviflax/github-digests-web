@@ -76,9 +76,17 @@ delete_account = () ->
   client.send()
   return
 
-request_get = (url, success_callback) ->
+request_get = (url, success_callback, error_callback) ->
   client = new XMLHttpRequest()
-  client.addEventListener 'load', success_callback
+
+  client.addEventListener 'load', ->
+    if this.status is 200
+      success_callback.call this
+    else if error_callback
+      error_callback.call this
+
+  if error_callback then client.addEventListener 'error', error_callback
+
   client.responseType = 'json'
   client.open 'GET', url
   client.setRequestHeader 'Accept', 'application/json'
@@ -96,8 +104,10 @@ handle_get_settings_success = ->
 
   return
 
+redirect_home = -> window.location = '/'
+
 # possible race condition here with the DOM being loaded.
-request_get '/account/settings', handle_get_settings_success
+request_get '/account/settings', handle_get_settings_success, redirect_home
 
 d.addEventListener 'DOMContentLoaded', ->
     delete_button = d.getElementById('button_delete')

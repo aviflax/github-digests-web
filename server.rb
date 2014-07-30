@@ -81,7 +81,8 @@ end
 
 get '/account/settings', :provides => 'json' do
   protected!
-  DB.get_settings(session[:user_id]).to_json
+  settings = DB.get_settings(session[:user_id])
+  settings ? settings.to_json : [404, '{"error": "not found"}']
 end
 
 patch '/account/settings' do

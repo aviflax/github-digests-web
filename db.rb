@@ -35,7 +35,7 @@ module DB
 
   def self.get_settings(id)
     account = r.table('accounts').get(id).run(@connection)
-    account['settings']
+    account ? account['settings'] : account
   end
 
   def self.delete_account(id)
