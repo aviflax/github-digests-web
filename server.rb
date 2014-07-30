@@ -73,20 +73,31 @@ get '/oauth2/callback' do
   redirect '/settings', 307
 end
 
-get '/settings', :provides => 'html' do
+get '/settings' do
   protected!
   # TODO: confirm that we have access to the scopes we need — see https://developer.github.com/guides/basics-of-authentication/#checking-granted-scopes
   send_file File.join(settings.public_folder, 'settings.html')
 end
 
-get '/settings', :provides => 'json' do
+get '/account/settings', :provides => 'json' do
   protected!
   DB.get_settings(session[:user_id]).to_json
 end
 
-patch '/settings' do
+patch '/account/settings' do
   protected!
   # TODO: validate and process the request
   # TODO: actually update the actual data, actually
+  [204, nil]
+end
+
+delete '/account' do
+  protected!
+  DB.delete_account(session[:user_id])
+
+  # TODO: a cleaner way to clear the session. like a clear_session fn maybe.
+  session[:user_id] = nil
+  session[:token] = nil
+
   [204, nil]
 end

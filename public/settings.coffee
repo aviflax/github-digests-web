@@ -3,7 +3,7 @@ d = document
 request_patch = (path, value) ->
   client = new XMLHttpRequest()
   client.addEventListener 'load', handle_patch_success
-  client.open 'PATCH', '/settings'
+  client.open 'PATCH', '/account/settings'
   client.setRequestHeader 'Content-Type', 'application/json-patch+json'
 
   body = [
@@ -67,6 +67,15 @@ show_ui = () ->
   d.getElementById('loading').style.display = 'none'
   d.getElementById('settings_main').style.display = 'inline-block'
 
+delete_account = () ->
+  client = new XMLHttpRequest()
+  client.addEventListener 'load', ->
+    alert('Account Deleted!')
+    window.location = '/'
+  client.open 'DELETE', '/account'
+  client.send()
+  return
+
 request_get = (url, success_callback) ->
   client = new XMLHttpRequest()
   client.addEventListener 'load', success_callback
@@ -88,7 +97,7 @@ handle_get_settings_success = ->
   return
 
 # possible race condition here with the DOM being loaded.
-request_get '/settings', handle_get_settings_success
+request_get '/account/settings', handle_get_settings_success
 
 d.addEventListener 'DOMContentLoaded', ->
     delete_button = d.getElementById('button_delete')
@@ -96,5 +105,4 @@ d.addEventListener 'DOMContentLoaded', ->
     d.getElementById('checkbox_enable_delete').addEventListener 'change', ->
       delete_button.disabled = !@checked
 
-    delete_button.addEventListener 'click', ->
-      alert('Coming soon!')
+    delete_button.addEventListener 'click', delete_account

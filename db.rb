@@ -37,4 +37,11 @@ module DB
     account = r.table('accounts').get(id).run(@connection)
     account['settings']
   end
+
+  def self.delete_account(id)
+    result = r.table('accounts').get(id).delete().run(@connection)
+    if result['deleted'] != 1
+      raise 'account not deleted!'
+    end
+  end
 end
